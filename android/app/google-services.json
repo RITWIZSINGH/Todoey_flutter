@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1028740404635",
+    "project_id": "todoey-3012d",
+    "storage_bucket": "todoey-3012d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1028740404635:android:f9c03f78d1c4abf241fd3e",
+        "android_client_info": {
+          "package_name": "com.ritwiz.todoey"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6uI6VW6zQixjA2ySa01R23u1mQlfasrA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
