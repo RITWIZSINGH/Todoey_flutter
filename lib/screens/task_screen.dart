@@ -19,7 +19,13 @@ class _TasksScreenState extends State<TasksScreen> {
         onPressed: () {
           showModalBottomSheet(
               context: context,
-              builder: (BuildContext context) => AddTaskScreen());
+              isScrollControlled: true,
+              builder: (BuildContext context) => SingleChildScrollView(
+                child: Container(
+                    padding: EdgeInsets.only(
+                        bottom: MediaQuery.of(context).viewInsets.bottom),
+                    child: AddTaskScreen()),
+              ));
         },
         backgroundColor: Colors.lightBlueAccent,
         child: Icon(
