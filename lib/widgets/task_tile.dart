@@ -1,53 +1,29 @@
-// ignore_for_file: use_key_in_widget_constructors, library_private_types_in_public_api, prefer_const_constructors_in_immutables
+// ignore_for_file: use_key_in_widget_constructors, library_private_types_in_public_api, prefer_const_constructors_in_immutables, unused_import
 
 import 'package:flutter/material.dart';
 
-class TasksTile extends StatefulWidget {
-  @override
-  _TasksTileState createState() => _TasksTileState();
-}
+class TasksTile extends StatelessWidget {
+  late final bool isChecked;
+  late final String taskTitle;
+  final Function checkBoxCallBack;
 
-class _TasksTileState extends State<TasksTile> {
-  bool isChecked = true;
-
-  void checkBoxCallBack(bool? value) {
-    setState(() {
-      isChecked = value ?? false;
-    });
-  }
+  TasksTile({required this.taskTitle, required this.isChecked, required this.checkBoxCallBack});
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text(
-        'This is a Task.',
-        style: TextStyle(
-          decoration: isChecked ? TextDecoration.lineThrough : null,
+        title: Text(
+          taskTitle,
+          style: TextStyle(
+            decoration: isChecked ? TextDecoration.lineThrough : null,
+          ),
         ),
-      ),
-      trailing: TaskCheckBox(
-        checkBoxState: isChecked,
-        toggleCheckBoxState: checkBoxCallBack,
-      ),
-    );
-  }
-}
-
-class TaskCheckBox extends StatelessWidget {
-  final bool checkBoxState;
-  final Function(bool?) toggleCheckBoxState;
-
-  TaskCheckBox({
-    required this.checkBoxState,
-    required this.toggleCheckBoxState,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Checkbox(
-      value: checkBoxState,
-      activeColor: Colors.lightBlueAccent,
-      onChanged: toggleCheckBoxState,
-    );
+        trailing: Checkbox(
+          value: isChecked,
+          activeColor: Colors.lightBlueAccent,
+          onChanged: (newValue) {
+            checkBoxCallBack(newValue);
+          },
+        ));
   }
 }
