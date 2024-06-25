@@ -1,16 +1,16 @@
-// ignore_for_file: prefer_const_constructors, library_private_types_in_public_api, use_key_in_widget_constructors, sort_child_properties_last, unnecessary_import, avoid_unnecessary_containers, unused_import
+// ignore_for_file: prefer_const_constructors, library_private_types_in_public_api, use_key_in_widget_constructors, sort_child_properties_last, unnecessary_import, avoid_unnecessary_containers, unused_import, avoid_print
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:todoey/widgets/task_list.dart';
 import 'package:todoey/screens/add_task_screen.dart';
+import 'package:todoey/models/task.dart';
+import 'package:provider/provider.dart';
+import 'package:todoey/main.dart';
+import 'package:todoey/models/task_data.dart';
 
-class TasksScreen extends StatefulWidget {
-  @override
-  _TasksScreenState createState() => _TasksScreenState();
-}
-
-class _TasksScreenState extends State<TasksScreen> {
+class TasksScreen extends StatelessWidget {
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,14 +18,23 @@ class _TasksScreenState extends State<TasksScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showModalBottomSheet(
-              context: context,
-              isScrollControlled: true,
-              builder: (BuildContext context) => SingleChildScrollView(
-                child: Container(
-                    padding: EdgeInsets.only(
-                        bottom: MediaQuery.of(context).viewInsets.bottom),
-                    child: AddTaskScreen()),
-              ));
+            context: context,
+            isScrollControlled: true,
+            builder: (BuildContext context) => SingleChildScrollView(
+              child: Container(
+                padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom),
+                child: AddTaskScreen(
+                  (newTaskTitle) {
+                    // setState(() {
+                    //   Provider.of<Data>(context,listen: false).addTask(newTaskTitle);
+                    // });
+                    Navigator.pop(context);
+                  },
+                ),
+              ),
+            ),
+          );//Show modal sheet button
         },
         backgroundColor: Colors.lightBlueAccent,
         child: Icon(
@@ -64,7 +73,7 @@ class _TasksScreenState extends State<TasksScreen> {
             Padding(
               padding: const EdgeInsets.only(left: 25, bottom: 10),
               child: Text(
-                '12 Tasks',
+                (Provider.of<Data>(context).tasks.isEmpty) ? 'You have nothing to do':'${Provider.of<Data>(context).taskCount} Tasks Remaining',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 16.5,
