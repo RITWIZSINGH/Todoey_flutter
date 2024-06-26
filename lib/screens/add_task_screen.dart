@@ -1,11 +1,12 @@
 // ignore_for_file: unused_import, use_key_in_widget_constructors, prefer_const_constructors, avoid_unnecessary_containers, prefer_const_literals_to_create_immutables, unused_local_variable, avoid_print, prefer_const_constructors_in_immutables
 
+
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todoey/models/task.dart';
+import 'package:todoey/models/task_data.dart';
 
 class AddTaskScreen extends StatelessWidget {
-  late final Function addTaskCallBack;
-
-  AddTaskScreen(this.addTaskCallBack);
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +53,8 @@ class AddTaskScreen extends StatelessWidget {
               padding: EdgeInsets.only(top: 20),
               child: TextButton(
                 onPressed: () {
-                  addTaskCallBack(newTaskTitle);
+                  Provider.of<Data>(context,listen: false).addTask(newTaskTitle);
+                  Navigator.pop(context);
                 },
                 child: Container(
                   decoration: BoxDecoration(

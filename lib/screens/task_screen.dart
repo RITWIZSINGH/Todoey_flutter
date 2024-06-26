@@ -24,14 +24,7 @@ class TasksScreen extends StatelessWidget {
               child: Container(
                 padding: EdgeInsets.only(
                     bottom: MediaQuery.of(context).viewInsets.bottom),
-                child: AddTaskScreen(
-                  (newTaskTitle) {
-                    // setState(() {
-                    //   Provider.of<Data>(context,listen: false).addTask(newTaskTitle);
-                    // });
-                    Navigator.pop(context);
-                  },
-                ),
+                child: AddTaskScreen(),
               ),
             ),
           );//Show modal sheet button

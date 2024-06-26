@@ -1,22 +1,27 @@
-// ignore_for_file: unused_import
+// ignore_for_file: unused_import, prefer_final_fields
 
 import 'package:flutter/foundation.dart';
 import 'package:provider/provider.dart';
 import 'package:todoey/models/task.dart';
+import 'dart:collection';
 
 class Data extends ChangeNotifier {
-  List<Task> tasks = [
+  List<Task> _tasks = [
     Task(name: 'Buy Milk'),
     Task(name: 'Buy eggs'),
     Task(name: 'Buy bread'),
   ];
 
+  UnmodifiableListView<Task> get tasks {
+    return UnmodifiableListView(_tasks);
+  }
+
   void addTask(String newTask) {
-    tasks.add(Task(name: newTask));
+    _tasks.add(Task(name: newTask));
     notifyListeners();
   }
 
   int get taskCount{
-    return tasks.length;
+    return _tasks.length;
   }
 }
