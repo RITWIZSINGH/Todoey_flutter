@@ -1,4 +1,4 @@
-// ignore_for_file: unused_import, use_key_in_widget_constructors, prefer_const_constructors_in_immutables
+// ignore_for_file: unused_import, use_key_in_widget_constructors, prefer_const_constructors_in_immutables, unused_local_variable
 
 import 'package:flutter/material.dart';
 import 'task_tile.dart';
@@ -13,14 +13,17 @@ class TasksList extends StatelessWidget {
       builder: (context, taskData, child) {
         return ListView.builder(
           itemBuilder: (context, index) {
+            final task = taskData.tasks[index];
             return TasksTile(
-                taskTitle: taskData.tasks[index].name,
-                isChecked: taskData.tasks[index].isDone,
+                taskTitle: task.name,
+                isChecked: task.isDone,
                 checkBoxCallBack: (bool checkboxState) {
-                  // setState(() {
-                  //   Provider.of<Data>(context,listen: false).tasks[index].toggleDone();
-                  // });
-                });
+                 taskData.updateTask(task);  
+                },
+                longPressCallBack: (){
+                  taskData.deleteTask(task);
+                },
+                );
           },
           itemCount: taskData.taskCount,
         );
